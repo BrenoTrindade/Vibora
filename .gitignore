@@ -1,0 +1,85 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+Debug/
+Release/
+x64/
+x86/
+[Aa]ppPackages/
+TestResults/
+*.VisualState.xml
+*.user
+*.suo
+*.cache
+*.pdb
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/
+.history/
+
+# Backup and report files
+*.bak
+*.bkp
+*.tmp
+*.log
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+project.lock.json
+project.assets.json
+
+# Configuration files
+appsettings.*.json
+secrets.json
+*.config.local
+
+# Environment files
+.env
+.env.*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# User-specific files
+*.userprefs
+*.rsuser
+.vs/
+
+# Entity Framework
+Migrations/
+
+# Publish outputs
+publish/
+dist/
+out/
+
+# Key files (certificados, assinaturas, keystores)
+*.keystore
+*.cer
+*.pfx
+*.pem
+*.key
+
+# Tools / Coverage
+coverage/
+.coverage
+coverage.cobertura.xml
+*.coverage
+*.coveragexml
+TestResult.xml
+
+# Others
+Releases/
+temp/
+tmp/
+*.orig
+*.rej
