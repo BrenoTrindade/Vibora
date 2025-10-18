@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Vibora.Domain\Vibora.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
