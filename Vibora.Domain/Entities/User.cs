@@ -1,9 +1,7 @@
-﻿using Ulid = System.Ulid;
-
-namespace Vibora.Domain.Entities;
+﻿namespace Vibora.Domain.Entities;
 public class User
 {
-    public Ulid Id { get; private set; }
+    public Guid Id { get; private set; }
     public string Name { get; private set; }
     public string Email { get; private set; }
     public string PasswordHash { get; private set; }
@@ -11,7 +9,7 @@ public class User
 
     public User(string name, string email, string passwordHash)
     {
-        Id = Ulid.NewUlid();
+        Id = Guid.CreateVersion7();
         Name = name;
         Email = email;
         PasswordHash = passwordHash;

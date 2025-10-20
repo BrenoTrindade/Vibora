@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: vibora
+    volumes:
+      - postgres_data:/postgresql
+  vibora.api:
+    build:
+      context: .
+      dockerfile: Vibora.API/Dockerfile 
+    ports:
+      - "5044:5044"
+    environment:
+      ConnectionStrings__ViboraDb: Host=postgres;Port=5432;Database=vibora;Username=user;Password=password
+      depends_on:
+      postgres:
+volumes:
+  postgres_data:

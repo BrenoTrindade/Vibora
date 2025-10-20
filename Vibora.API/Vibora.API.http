@@ -1,6 +1,12 @@
 @Vibora.API_HostAddress = http://localhost:5044
 
-GET {{Vibora.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
+POST {{Vibora.API_HostAddress}}/api/users/register
+Content-Type: application/json
+{
+  "name": "Breno Trindade",
+  "email": "breno@email.com",
+  "password": "uma_senha_muito_segura_123"
+}
 ###
+GET {{Vibora.API_HostAddress}}/api/users/0199ff74-f362-7f28-ba3b-421da41855eb
+Accept: application/json
