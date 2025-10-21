@@ -1,4 +1,5 @@
-﻿using Vibora.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Vibora.Domain.Entities;
 using Vibora.Domain.Repositories;
 using Vibora.Infrastructure.Persistence;
 
@@ -22,5 +23,11 @@ public class UserRepository: IUserRepository
     public async Task<User?> GetByIdAsync(Guid guid)
     {
         return await _context.Users.FindAsync(guid);
+    }
+    public async Task<User?> GetByEmailAsync(string email)
+    {
+        return await _context.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(u => u.Email == email);
     }
 }
