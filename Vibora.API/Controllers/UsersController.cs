@@ -25,6 +25,20 @@ namespace Vibora.API.Controllers
             return CreatedAtAction(nameof(GetUserById), new { id = userId }, new { id = userId });
         }
 
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginQuery query)
+        {
+            try
+            {
+                var response = await _mediator.Send(query);
+                return Ok(response);
+            }
+            catch (InvalidCredentialsException ex)
+            {
+                return Unauthorized(ex.Message);
+            }
+        }
+
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetUserById(Guid id)
         {

@@ -21,6 +21,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<IPasswordHasherService, PasswordHasherService>();
 
+builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

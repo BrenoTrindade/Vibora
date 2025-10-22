@@ -8,5 +8,13 @@ Content-Type: application/json
   "password": "uma_senha_muito_segura_123"
 }
 ###
+POST {{Vibora.API_HostAddress}}/api/users/login
+Content-Type: application/json
+{
+  "email": "breno@email.com",
+  "password": "uma_senha_muito_segura_123"
+}
+###
 GET {{Vibora.API_HostAddress}}/api/users/0199ff74-f362-7f28-ba3b-421da41855eb
 Accept: application/json
+
