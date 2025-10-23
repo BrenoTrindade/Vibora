@@ -1,60 +1,60 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vibora.Application.Users.Commands;
 using Vibora.Application.Users.Queries;
-using Vibora.Domain.Entities;
 using Vibora.Domain.Exceptions;
 
-namespace Vibora.API.Controllers
+namespace Vibora.API.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class UsersController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UsersController : ControllerBase
+    private readonly ISender _mediator;
+
+    public UsersController(ISender mediator)
     {
-        private readonly ISender _mediator;
+        _mediator = mediator;
+    }
 
-        public UsersController(ISender mediator)
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] RegisterUserCommand command)
+    {
+        var userId = await _mediator.Send(command);
+        return CreatedAtAction(nameof(GetUserById), new { id = userId }, new { id = userId });
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] LoginQuery query)
+    {
+        try
         {
-            _mediator = mediator;
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
+        catch (InvalidCredentialsException ex)
+        {
+            return Unauthorized(ex.Message);
+        }
+    }
+
+    [HttpGet("{id:guid}")]
+    [Authorize]
+    public async Task<IActionResult> GetUserById(Guid id)
+    {
+        try
+        {
+            var query = new GetUserByIdQuery(id);
+            var user = await _mediator.Send(query);
+
+            return Ok(user);
+
+        }
+        catch (UserNotFoundException ex)
+        {
+            return NotFound(new { message = ex.Message });
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterUserCommand command)
-        {
-            var userId = await _mediator.Send(command);
-            return CreatedAtAction(nameof(GetUserById), new { id = userId }, new { id = userId });
-        }
-
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginQuery query)
-        {
-            try
-            {
-                var response = await _mediator.Send(query);
-                return Ok(response);
-            }
-            catch (InvalidCredentialsException ex)
-            {
-                return Unauthorized(ex.Message);
-            }
-        }
-
-        [HttpGet("{id:guid}")]
-        public async Task<IActionResult> GetUserById(Guid id)
-        {
-            try
-            {
-                var query = new GetUserByIdQuery(id);
-                var user = await _mediator.Send(query);
-
-                return Ok(user);
-
-            }
-            catch (UserNotFoundException ex)
-            {
-                return NotFound(new { message = ex.Message });
-            }
-            
-        }
     }
 }
