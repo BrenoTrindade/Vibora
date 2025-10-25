@@ -1,20 +1,31 @@
 @Vibora.API_HostAddress = http://localhost:5044
 
+### REGISTER
+# @name registerRequest
 POST {{Vibora.API_HostAddress}}/api/users/register
 Content-Type: application/json
+
 {
-  "name": "Breno Trindade",
-  "email": "breno@email.com",
-  "password": "uma_senha_muito_segura_123"
+  "name": "Breno Auth Test",
+  "email": "breno-auth12@email.com",
+  "password": "senha_segura_123"
 }
-###
+
+### LOGIN
+# @name loginRequest
 POST {{Vibora.API_HostAddress}}/api/users/login
 Content-Type: application/json
+
 {
-  "email": "breno@email.com",
-  "password": "uma_senha_muito_segura_123"
+  "email": "breno-auth11@email.com",
+  "password": "senha_segura_123"
 }
-###
-GET {{Vibora.API_HostAddress}}/api/users/0199ff74-f362-7f28-ba3b-421da41855eb
+
+### GET USER (SEM TOKEN)
+GET {{Vibora.API_HostAddress}}/api/users/019a127f-a370-77a6-8297-780fa67f490b
 Accept: application/json
 
+### GET USER (COM TOKEN)
+GET {{Vibora.API_HostAddress}}/api/users/019a127f-a370-77a6-8297-780fa67f490b
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTlhMTI3Zi0zN2NlLTc0OWYtYTA5Ni0xY2IwY2MxNjU3ZmUiLCJ1bmlxdWVfbmFtZSI6IkJyZW5vIEF1dGggVGVzdCIsImVtYWlsIjoiYnJlbm8tYXV0aDExQGVtYWlsLmNvbSIsIm5iZiI6MTc2MTI0Njk2MSwiZXhwIjoxNzYxMjU0MTYxLCJpYXQiOjE3NjEyNDY5NjEsImlzcyI6IlZpYm9yYUFQSSIsImF1ZCI6IlZpYm9yYUFwcCJ9.2I6_X90CJwM-KixhuGZoiOk2ScvqNZ2vnCsEuYVds2I

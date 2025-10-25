@@ -1,27 +1,28 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Vibora.Application.Common.Interfaces;
 using Vibora.Domain.Entities;
+using Vibora.Infrastructure.Settings;
 
 namespace Vibora.Infrastructure.Services;
 
 public class JwtTokenGenerator : IJwtTokenGenerator
 {
-    private readonly IConfiguration _configuration;
+    private readonly JwtSettings _jwtSettings;
 
-    public JwtTokenGenerator(IConfiguration configuration)
+    public JwtTokenGenerator(IOptions<JwtSettings> jwtSettingsOptions)
     {
-        _configuration = configuration;
+        _jwtSettings = jwtSettingsOptions.Value;
     }
 
     public string GenerateToken(User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
 
-        var key = Encoding.ASCII.GetBytes(_configuration["Jwt:SecretKey"]);
 
         var claims = new List<Claim>
         {
@@ -30,14 +31,15 @@ public class JwtTokenGenerator : IJwtTokenGenerator
             new Claim(JwtRegisteredClaimNames.Email, user.Email)
         };
 
-        var expiryMinutes = _configuration.GetValue<int>("Jwt:ExpirationHours");
+        var key = Encoding.ASCII.GetBytes(_jwtSettings.SecretKey);
+        var expiryMinutes = _jwtSettings.ExpirationMinutes;
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
             Expires = DateTime.UtcNow.AddHours(expiryMinutes),
-            Issuer = _configuration["Jwt:Issuer"],
-            Audience = _configuration["Jwt:Audience"],
+            Issuer = _jwtSettings.Issuer,
+            Audience = _jwtSettings.Audience,
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
