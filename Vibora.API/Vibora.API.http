@@ -7,7 +7,7 @@ Content-Type: application/json
 
 {
   "name": "Breno Auth Test",
-  "email": "breno-auth12@email.com",
+  "email": "breno-auth13@email.com",
   "password": "senha_segura_123"
 }
 
@@ -17,15 +17,16 @@ POST {{Vibora.API_HostAddress}}/api/users/login
 Content-Type: application/json
 
 {
-  "email": "breno-auth11@email.com",
+  "email": "breno-auth13@email.com",
   "password": "senha_segura_123"
 }
 
 ### GET USER (SEM TOKEN)
-GET {{Vibora.API_HostAddress}}/api/users/019a127f-a370-77a6-8297-780fa67f490b
+GET {{Vibora.API_HostAddress}}/api/users/019a1909-17a0-7546-8997-6233d6fbf805
 Accept: application/json
 
 ### GET USER (COM TOKEN)
-GET {{Vibora.API_HostAddress}}/api/users/019a127f-a370-77a6-8297-780fa67f490b
+GET {{Vibora.API_HostAddress}}/api/users/019a1909-17a0-7546-8997-6233d6fbf805
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTlhMTI3Zi0zN2NlLTc0OWYtYTA5Ni0xY2IwY2MxNjU3ZmUiLCJ1bmlxdWVfbmFtZSI6IkJyZW5vIEF1dGggVGVzdCIsImVtYWlsIjoiYnJlbm8tYXV0aDExQGVtYWlsLmNvbSIsIm5iZiI6MTc2MTI0Njk2MSwiZXhwIjoxNzYxMjU0MTYxLCJpYXQiOjE3NjEyNDY5NjEsImlzcyI6IlZpYm9yYUFQSSIsImF1ZCI6IlZpYm9yYUFwcCJ9.2I6_X90CJwM-KixhuGZoiOk2ScvqNZ2vnCsEuYVds2I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTlhMTkwOS0xN2EwLTc1NDYtODk5Ny02MjMzZDZmYmY4MDUiLCJ1bmlxdWVfbmFtZSI6IkJyZW5vIEF1dGggVGVzdCIsImVtYWlsIjoiYnJlbm8tYXV0aDEzQGVtYWlsLmNvbSIsIm5iZiI6MTc2MTM1NjYzOCwiZXhwIjoxNzYxNDEwNjM4LCJpYXQiOjE3NjEzNTY2MzgsImlzcyI6IlZpYm9yYUFQSSIsImF1ZCI6IlZpYm9yYUFwcCJ9.rtdm0FceN8ILIWOsZrq0GFAn3jF3EglMD4aGjcKr9kE
+
