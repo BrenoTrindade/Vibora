@@ -26,7 +26,7 @@ public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, A
         var principal = _jwtTokenGenerator.GetPrincipalFromExpiredToken(request.Token);
         var userIdString = principal?.FindFirst(ClaimTypes.NameIdentifier).Value;
         
-        if (userIdString is null || Guid.TryParse(userIdString, out var userId))
+        if (userIdString is null || !Guid.TryParse(userIdString, out var userId))
         {
             throw new InvalidRefreshTokenException();
         }
