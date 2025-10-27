@@ -7,7 +7,7 @@ Content-Type: application/json
 
 {
   "name": "Breno Auth Test",
-  "email": "breno-auth13@email.com",
+  "email": "breno-auth14@email.com",
   "password": "senha_segura_123"
 }
 
@@ -17,16 +17,24 @@ POST {{Vibora.API_HostAddress}}/api/users/login
 Content-Type: application/json
 
 {
-  "email": "breno-auth13@email.com",
+  "email": "breno-auth14@email.com",
   "password": "senha_segura_123"
+}
+### REFRESHTOKEN
+# @name refreshTokenRequest
+POST {{Vibora.API_HostAddress}}/api/users/refresh
+Content-Type: application/json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTlhMjM2My03NzIxLTcyOWYtOWI5MC1lMGM4YmI2MzMzYTUiLCJ1bmlxdWVfbmFtZSI6IkJyZW5vIEF1dGggVGVzdCIsImVtYWlsIjoiYnJlbm8tYXV0aDE0QGVtYWlsLmNvbSIsIm5iZiI6MTc2MTUzMTI2NSwiZXhwIjoxNzYxNTg1MjY1LCJpYXQiOjE3NjE1MzEyNjUsImlzcyI6IlZpYm9yYUFQSSIsImF1ZCI6IlZpYm9yYUFwcCJ9.hfQ8iXmSSFYGIT1pXW1Ac55DWqxxWN3ILeyvZ4EE_Gs",
+  "refreshToken": "oWgy39CcmLstpNNNKxyIGHLa61K0hcVmh+OJxs/JZ5XQLP6Jdi9rxwwKj58avkzHwvjog2A2AYI48Et9FDm1wA=="
 }
 
 ### GET USER (SEM TOKEN)
-GET {{Vibora.API_HostAddress}}/api/users/019a1909-17a0-7546-8997-6233d6fbf805
+GET {{Vibora.API_HostAddress}}/api/users/019a2363-7721-729f-9b90-e0c8bb6333a5
 Accept: application/json
 
 ### GET USER (COM TOKEN)
-GET {{Vibora.API_HostAddress}}/api/users/019a1909-17a0-7546-8997-6233d6fbf805
+GET {{Vibora.API_HostAddress}}/api/users/019a2363-7721-729f-9b90-e0c8bb6333a5
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTlhMTkwOS0xN2EwLTc1NDYtODk5Ny02MjMzZDZmYmY4MDUiLCJ1bmlxdWVfbmFtZSI6IkJyZW5vIEF1dGggVGVzdCIsImVtYWlsIjoiYnJlbm8tYXV0aDEzQGVtYWlsLmNvbSIsIm5iZiI6MTc2MTM1NjYzOCwiZXhwIjoxNzYxNDEwNjM4LCJpYXQiOjE3NjEzNTY2MzgsImlzcyI6IlZpYm9yYUFQSSIsImF1ZCI6IlZpYm9yYUFwcCJ9.rtdm0FceN8ILIWOsZrq0GFAn3jF3EglMD4aGjcKr9kE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwMTlhMjM2My03NzIxLTcyOWYtOWI5MC1lMGM4YmI2MzMzYTUiLCJ1bmlxdWVfbmFtZSI6IkJyZW5vIEF1dGggVGVzdCIsImVtYWlsIjoiYnJlbm8tYXV0aDE0QGVtYWlsLmNvbSIsIm5iZiI6MTc2MTUzMDQyOSwiZXhwIjoxNzYxNTg0NDI5LCJpYXQiOjE3NjE1MzA0MjksImlzcyI6IlZpYm9yYUFQSSIsImF1ZCI6IlZpYm9yYUFwcCJ9.vcQllM3l8LGq6A6jEgAz9t_7GhETa7xN9300tMGK66E
 

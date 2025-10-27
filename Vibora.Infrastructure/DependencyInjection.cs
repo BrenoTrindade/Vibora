@@ -2,8 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using Microsoft.Extensions.Options;
 using Vibora.Application.Common.Interfaces;
 using Vibora.Domain.Repositories;
 using Vibora.Infrastructure.Persistence;
@@ -19,6 +18,8 @@ namespace Vibora.Infrastructure
             this IServiceCollection services,
             IConfiguration configuration)
         {
+            services.AddSingleton<IConfigureOptions<JwtBearerOptions>, JwtBearerOptionsSetup>();
+
             services.AddJwtAuthentication(configuration);
 
             services.AddPersistence(configuration);
@@ -29,7 +30,6 @@ namespace Vibora.Infrastructure
 
             return services;
         }
-
         private static IServiceCollection AddPersistence(
             this IServiceCollection services,
             IConfiguration configuration)
@@ -39,6 +39,8 @@ namespace Vibora.Infrastructure
                 options.UseNpgsql(connectionString));
 
             services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
             return services;
         }
@@ -56,21 +58,7 @@ namespace Vibora.Infrastructure
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = jwtSettings.Issuer,
-                    ValidAudience = jwtSettings.Audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(jwtSettings.SecretKey)
-                    )
-                };
-            });
+            .AddJwtBearer();
 
             services.AddAuthorization();
 

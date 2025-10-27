@@ -39,6 +39,21 @@ public class UsersController : ControllerBase
         }
     }
 
+    [HttpPost("Refresh")]
+    public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenCommand command)
+    {
+        try
+        {
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
+        catch (InvalidRefreshTokenException exception)
+        {
+
+            return Unauthorized(new { Message = exception.Message});
+        }
+    }
+
     [HttpGet("{id:guid}")]
     [Authorize]
     public async Task<IActionResult> GetUserById(Guid id)
