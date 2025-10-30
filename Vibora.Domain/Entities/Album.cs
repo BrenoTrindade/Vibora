@@ -1,6 +1,4 @@
-﻿using Vibora.Domain.Entities; // Para referenciar Track e Artist
-
-namespace Vibora.Domain.Entities;
+﻿namespace Vibora.Domain.Entities;
 
 public class Album
 {
