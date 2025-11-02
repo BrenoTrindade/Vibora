@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Vibora.Application.Users.Common;
+namespace Vibora.Application.Tracks.Common;
 
 public class TrackResponse
 {

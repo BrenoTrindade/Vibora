@@ -1,11 +1,11 @@
 ﻿using MediatR;
-using Vibora.Application.Users.Common;
-using Vibora.Application.Users.Queries;
+using Vibora.Application.Tracks.Common;
+using Vibora.Application.Tracks.Queries;
 using Vibora.Domain.Entities;
 using Vibora.Domain.Exceptions;
 using Vibora.Domain.Repositories;
 
-namespace Vibora.Application.Users.Handlers;
+namespace Vibora.Application.Tracks.Handlers;
 
 public class GetTrackByIdQueryHandler : IRequestHandler<GetTrackByIdQuery, TrackResponse>
 {

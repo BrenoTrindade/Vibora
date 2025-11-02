@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Vibora.Application.Users.Common;
+using Vibora.Application.Tracks.Common;
 
-namespace Vibora.Application.Users.Queries;
+namespace Vibora.Application.Tracks.Queries;
 public record GetTrackByIdQuery(Guid Id) : IRequest<TrackResponse>;
