@@ -43,6 +43,8 @@ namespace Vibora.Infrastructure
 
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
+            services.AddScoped<ITrackRepository, TrackRepository>();
+
             return services;
         }
 

@@ -24,6 +24,7 @@ public class UserRepository: IUserRepository
     {
         return await _context.Users.FindAsync(guid);
     }
+
     public async Task<User?> GetByEmailAsync(string email)
     {
         return await _context.Users
