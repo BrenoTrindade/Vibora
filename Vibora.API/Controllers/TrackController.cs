@@ -1,8 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Vibora.Application.Users.Handlers;
-using Vibora.Application.Users.Queries;
+using Vibora.Application.Tracks.Queries;
 using Vibora.Domain.Exceptions;
 
 namespace Vibora.API.Controllers;
