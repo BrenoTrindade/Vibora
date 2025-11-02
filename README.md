@@ -10,7 +10,7 @@
 
 
 🎵 Vibora API - Música (API REST)
-Vibora é uma API de música desenvolvida em .NET com um design focado em alto desempenho e experiência fluida. Esta API serve como backend robusto para aplicações que exigem velocidade e segurança no gerenciamento de dados musicais, utilizando autenticação via JSON Web Tokens (JWT).
+Vibora é uma API de música desenvolvida em .NET com um design focado em alto desempenho e experiência fluida. Esta API serve como backend robusto para aplicações que exigem velocidade e segurança no gerenciamento de dados musicais, utilizando autenticação via (JWT).
 
 ✨ Sobre o Projeto
 O objetivo principal da Vibora API é oferecer um serviço RESTful rápido e confiável para gerenciamento de catálogos musicais, usuários e playlists.
