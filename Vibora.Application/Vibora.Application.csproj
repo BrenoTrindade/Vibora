@@ -14,8 +14,4 @@
     <ProjectReference Include="..\Vibora.Domain\Vibora.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Tracks\Commands\" />
-  </ItemGroup>
-
 </Project>
