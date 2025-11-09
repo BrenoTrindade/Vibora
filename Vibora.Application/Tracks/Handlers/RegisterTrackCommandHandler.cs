@@ -17,7 +17,7 @@ public class RegisterTrackCommandHandler : IRequestHandler<RegisterTrackCommand,
     {
 		var track = new Track(request.Title, request.AudioUrl, request.Duration, request.ArtistId, request.AlbumId);
 
-		await _repository.Add(track);
+		await _repository.AddAsync(track);
 
 		return track.Id;
 	}

@@ -3,7 +3,7 @@
 namespace Vibora.Domain.Repositories;
 public interface ITrackRepository
 {
-    Task Add(Track track);
-    Task Delete(Track track);
-    Task<Track> GetById(Guid id);
+    Task AddAsync(Track track);
+    Task DeleteAsync(Track track);
+    Task<Track?> GetByIdAsync(Guid id);
 }

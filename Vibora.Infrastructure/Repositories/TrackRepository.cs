@@ -11,19 +11,19 @@ public class TrackRepository : ITrackRepository
         _context = context;
     }
 
-    public async Task Add(Track track)
+    public async Task AddAsync(Track track)
     {
         await _context.Tracks.AddAsync(track);
         await _context.SaveChangesAsync();
     }
 
-    public async Task Delete(Track track)
+    public async Task DeleteAsync(Track track)
     {
         _context.Tracks.Remove(track);
         await _context.SaveChangesAsync();
     }
 
-    public async Task<Track> GetById(Guid id)
+    public async Task<Track?> GetByIdAsync(Guid id)
     {
         return await _context.Tracks.FindAsync(id);
     }

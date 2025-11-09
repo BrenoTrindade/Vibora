@@ -16,12 +16,12 @@ public class DeleteTrackCommandHandler : IRequestHandler<DeleteTrackCommand, Uni
 
     public async Task<Unit> Handle(DeleteTrackCommand request, CancellationToken cancellationToken)
     {
-        var track = await _trackRepository.GetById(request.Id);
+        var track = await _trackRepository.GetByIdAsync(request.Id);
 
         if (track is null)
             throw new TrackNotFoundException(request.Id);
 
-        await _trackRepository.Delete(track);
+        await _trackRepository.DeleteAsync(track);
 
         return Unit.Value;
     }

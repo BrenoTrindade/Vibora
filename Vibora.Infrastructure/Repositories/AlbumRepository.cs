@@ -12,27 +12,27 @@ public class AlbumRepository : IAlbumRepository
         _dbContext = dbContext;
     }
 
-    public async Task Add(Album album)
-    {s
+    public async Task AddAsync(Album album)
+    {
         await _dbContext.Albums.AddAsync(album);
 
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task Delete(Album album)
+    public async Task DeleteAsync(Album album)
     {
         _dbContext.Albums.Remove(album);    
 
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<Album>> GetAll()
+    public async Task<IEnumerable<Album>> GetAllAsync()
     {
         return await _dbContext.Albums.AsNoTracking().ToListAsync();
     }
 
-    public async Task<Album?> GetById(Guid id)
+    public async Task<Album?> GetByIdAsync(Guid id)
     {
-        return _dbContext.Albums.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+        return await _dbContext.Albums.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
     }
 }

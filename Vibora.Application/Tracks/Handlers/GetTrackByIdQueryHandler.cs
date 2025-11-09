@@ -18,7 +18,7 @@ public class GetTrackByIdQueryHandler : IRequestHandler<GetTrackByIdQuery, Track
 
     public async Task<TrackResponse> Handle(GetTrackByIdQuery request, CancellationToken cancellationToken)
     {
-        var track = await _trackRepository.GetById(request.Id);
+        var track = await _trackRepository.GetByIdAsync(request.Id);
 
         if (track is null)
         {
