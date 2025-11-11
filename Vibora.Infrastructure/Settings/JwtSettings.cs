@@ -8,9 +8,9 @@ namespace Vibora.Infrastructure.Settings
 {
     public class JwtSettings
     {
-        public string SecretKey { get; set; }
-        public string Issuer { get; set; }
-        public string Audience { get; set; }
-        public int ExpirationMinutes { get; set; }
+        public string SecretKey { get; init; }
+        public string Issuer { get; init; }
+        public string Audience { get; init; }
+        public int ExpirationMinutes { get; init; }
     }
 }

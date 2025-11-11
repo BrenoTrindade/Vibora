@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using Vibora.Application.Common.Interfaces;
 using Vibora.Domain.Repositories;
 using Vibora.Infrastructure.Persistence;
@@ -55,8 +56,6 @@ namespace Vibora.Infrastructure
         {
             services.Configure<JwtSettings>(configuration.GetSection("Jwt"));
 
-            var jwtSettings = configuration.GetSection("Jwt").Get<JwtSettings>();
-
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -70,6 +69,40 @@ namespace Vibora.Infrastructure
             });
 
             services.AddAuthorization();
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Vibora API",
+                    Version = "v1",
+                    Description = "API para o aplicativo de streaming de música Vibora."
+                });
+
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Por favor, insira 'Bearer ' seguido do seu token JWT. Exemplo: 'Bearer 12345abcdef'",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] {}
+                    }
+                });
+            });
 
             return services;
         }
