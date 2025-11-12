@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 using Vibora.Application.Common.Interfaces;
 using Vibora.Domain.Repositories;
 using Vibora.Infrastructure.Persistence;
@@ -20,8 +22,6 @@ namespace Vibora.Infrastructure
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.AddSingleton<IConfigureOptions<JwtBearerOptions>, JwtBearerOptionsSetup>();
-
             services.AddJwtAuthentication(configuration);
 
             services.AddPersistence(configuration);
@@ -54,14 +54,32 @@ namespace Vibora.Infrastructure
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.Configure<JwtSettings>(configuration.GetSection("Jwt"));
+            var jwtSettings = new JwtSettings();
+            configuration.Bind("Jwt", jwtSettings);
+
+            services.AddSingleton(Options.Create(jwtSettings));
 
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer()
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.ASCII.GetBytes(jwtSettings.SecretKey)
+                    ),
+                    ValidateIssuer = true,
+                    ValidIssuer = jwtSettings.Issuer,
+                    ValidateAudience = true,
+                    ValidAudience = jwtSettings.Audience,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+            })
             .AddGoogle(googleOptions =>
             {
                 googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
