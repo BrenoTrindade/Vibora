@@ -5,11 +5,11 @@ using Vibora.Domain.Repositories;
 
 namespace Vibora.Application.Artists.Handlers;
 
-public class GetAllArtistsQueryHandler : IRequestHandler<GetAllArtistsQuery, IEnumerable<ArtistResponse>>
+public class GetAllArtistQueryHandler : IRequestHandler<GetAllArtistsQuery, IEnumerable<ArtistResponse>>
 {
     private readonly IArtistRepository _artistRepository;
 
-    public GetAllArtistsQueryHandler(IArtistRepository artistRepository)
+    public GetAllArtistQueryHandler(IArtistRepository artistRepository)
     {
         _artistRepository = artistRepository;
     }
