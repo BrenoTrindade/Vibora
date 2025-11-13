@@ -46,6 +46,7 @@ namespace Vibora.Infrastructure
 
             services.AddScoped<IArtistRepository, ArtistRepository>();
             services.AddScoped<ITrackRepository, TrackRepository>();
+            services.AddScoped<IAlbumRepository, AlbumRepository>();
 
             return services;
         }
