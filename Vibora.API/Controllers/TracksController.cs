@@ -8,11 +8,13 @@ using Vibora.Domain.Exceptions;
 
 namespace Vibora.API.Controllers;
 
-public class TrackController : ControllerBase
+[ApiController]
+[Route("api/[controller]")]
+public class TracksController : ControllerBase
 {
     private readonly ISender _mediator;
 
-    public TrackController(ISender mediator)
+    public TracksController(ISender mediator)
     {
         _mediator = mediator;
     }
@@ -36,7 +38,7 @@ public class TrackController : ControllerBase
         }
     }
 
-    [HttpPost("Register")]
+    [HttpPost]
     [Authorize]
     public async Task<IActionResult> Register([FromBody] RegisterTrackCommand command)
     {
@@ -53,7 +55,7 @@ public class TrackController : ControllerBase
         }
     }
 
-    [HttpDelete("Delete")]
+    [HttpDelete("{id:guid}")]
     [Authorize]
     public async Task<IActionResult> Delete(Guid id)
     {

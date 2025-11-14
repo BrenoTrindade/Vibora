@@ -8,12 +8,12 @@ using Vibora.Domain.Exceptions;
 namespace Vibora.API.Controllers;
 
 [ApiController]
-[Route("api/controller")]
-public class AlbumController : ControllerBase
+[Route("api/[controller]")]
+public class AlbumsController : ControllerBase
 {
     private readonly ISender _mediator;
 
-    public AlbumController(ISender mediator)
+    public AlbumsController(ISender mediator)
     {
         _mediator = mediator;
     }
@@ -44,7 +44,7 @@ public class AlbumController : ControllerBase
 
     [HttpPost]
     [Authorize]
-    public async Task<IActionResult> CreateArtist([FromBody] CreateAlbumCommand command)
+    public async Task<IActionResult> CreateAlbum([FromBody] CreateAlbumCommand command)
     {
         try
         {
@@ -59,7 +59,7 @@ public class AlbumController : ControllerBase
 
     [HttpDelete("{id:Guid}")]
     [Authorize]
-    public async Task<IActionResult> DeleteArtist(Guid id)
+    public async Task<IActionResult> DeleteAlbum(Guid id)
     {
         try
         {
