@@ -8,4 +8,5 @@ public interface IArtistRepository
     Task<IEnumerable<Artist>> GetAllAsync();
     Task AddAsync(Artist artist);
     Task DeleteAsync(Artist artist);
+    Task UpdateAsync(Artist artist);
 }

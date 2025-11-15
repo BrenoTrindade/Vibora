@@ -22,6 +22,7 @@ public class ArtistRepository : IArtistRepository
             .AsNoTracking()
             .ToListAsync();
     }
+
     public async Task AddAsync(Artist artist)
     {
         await _context.Artists.AddAsync(artist);
@@ -33,12 +34,18 @@ public class ArtistRepository : IArtistRepository
         _context.Artists.Remove(artist);
         await _context.SaveChangesAsync();
     }
+
     public async Task<Artist?> GetByIdAsync(Guid id)
     {
         return await _context.Artists
             .Include(a => a.Albums)
             .Include(a => a.Tracks)
-            .AsNoTracking()
             .FirstOrDefaultAsync(a => a.Id == id);
+    }
+
+    public async Task UpdateAsync(Artist artist)
+    {
+        _context.Update(artist);
+        await _context.SaveChangesAsync();
     }
 }

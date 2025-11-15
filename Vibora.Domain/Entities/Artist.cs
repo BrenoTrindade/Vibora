@@ -21,11 +21,20 @@ public class Artist
 
         Validate();
     }
-    private Artist(){}
+    private Artist() { }
+
+    public void Update(string name, string? bio, string? imageUrl)
+    {
+        Name = name;
+        Bio = bio;
+        ImageUrl = imageUrl;
+
+        Validate();
+    }
 
     private void Validate()
     {
-        if(string.IsNullOrWhiteSpace(Name))
+        if (string.IsNullOrWhiteSpace(Name))
         {
             throw new ArgumentException("O nome do artista é obrigatório.");
         }

@@ -71,4 +71,26 @@ public class ArtistsController : ControllerBase
             return NotFound(new { message = ex.Message });
         }
     }
+    [HttpPut("{id:Guid}")]
+    [Authorize]
+    public async Task<IActionResult> UpdateArtist(Guid id, [FromBody] UpdateArtistCommand command)
+    {
+        try
+        {
+            if (id != command.Id)
+            {
+                return BadRequest(new { message = "The id in the route must be the same as in the body" });
+            }
+            await _mediator.Send(command);
+            return NoContent();
+        }
+        catch (ArtistNotFoundException ex)
+        {
+            return NotFound(new { message = ex.Message });
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
+    }
 }
