@@ -10,9 +10,20 @@ builder.Services.AddApplication();
 
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Services.AddCors(options => {
+    options.AddPolicy("pol", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+
 var app = builder.Build();
 
 
+app.UseCors("pol");
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -24,6 +35,7 @@ if (app.Environment.IsDevelopment())
         c.RoutePrefix = string.Empty;
     });
 }
+
 
 app.MapControllers();
 
